@@ -17,7 +17,7 @@ class Donor(models.Model):
     contact_number = fields.Char(string='Contact Number', required=True)
     address = fields.Text(string='Address', tracking=True)
     last_donation_date = fields.Date(string='Last Donation Date')
-    total_donations = fields.Integer(string='Total Donations', compute='_compute_total_donations')
+    total_donations = fields.Integer(string='Total Donations', compute='_compute_total_donations', store=True)
 
     def _compute_total_donations(self):
         for donor in self:

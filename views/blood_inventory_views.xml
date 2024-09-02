@@ -7,16 +7,14 @@
         <field name="arch" type="xml">
             <tree string="Blood Inventory">
                 <field name="blood_type"/>
-                <field name="quantity" />
+                <field name="quantity"/>
                 <field name="expiration_date"/>
-                <field name="location" />
+                <field name="location"/>
                 <field name="status"/>
             </tree>
         </field>
     </record>
 
-
-  
     <!-- Blood Inventory Form View -->
     <record id="view_blood_inventory_form" model="ir.ui.view">
         <field name="name">blood.inventory.form</field>
@@ -25,10 +23,11 @@
             <form string="Blood Inventory">
                 <sheet>
                     <group>
+                        <field name="donor_id"></field>
                         <field name="blood_type"/>
-                        <field name="quantity" />
+                        <field name="quantity"/>
                         <field name="expiration_date"/>
-                        <field name="location" />
+                        <field name="location"/>
                         <field name="status" readonly="1"/>
                     </group>
                 </sheet>
@@ -36,26 +35,25 @@
         </field>
     </record>
 
-
-
     <!-- Blood Inventory Kanban View -->
     <record id="view_blood_inventory_kanban" model="ir.ui.view">
         <field name="name">blood.inventory.kanban</field>
         <field name="model">pathology.blood.inventory</field>
         <field name="arch" type="xml">
-            <kanban class="Donor">
+            <kanban class="BloodInventory">
                 <field name="blood_type"/>
-                <field name="quantity" />
+                <field name="quantity"/>
                 <field name="expiration_date"/>
-                <field name="location" />
+                <field name="location"/>
                 <field name="status" readonly="1"/>
 
                 <templates>
                     <t t-name="kanban-box">
                         <div class="o_kanban_details">
-                            <strong><field name="blood_type"/></strong><br/>      |      
-                            <field name="quantity" />    |     
-                            <field name="location" />    |    <field name="status"/>     |    
+                            <strong><field name="blood_type"/></strong><br/>
+                            <field name="quantity"/> Liters | 
+                            <field name="location"/> | 
+                            <field name="status"/> | 
                             <field name="expiration_date"/>
                         </div>
                     </t>
@@ -64,11 +62,43 @@
         </field>
     </record>
 
+    <!-- Blood Inventory Calendar View -->
+    <record id="view_blood_inventory_calendar" model="ir.ui.view">
+        <field name="name">blood.inventory.calendar</field>
+        <field name="model">pathology.blood.inventory</field>
+        <field name="arch" type="xml">
+            <calendar string="Blood Inventory Calendar" date_start="expiration_date" color="blood_type">
+                <field name="blood_type"/>
+                <field name="quantity"/>
+                <field name="expiration_date"/>
+                <field name="location"/>
+                <field name="status"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Blood Inventory Graph View -->
+    <record id="view_blood_inventory_graph" model="ir.ui.view">
+        <field name="name">blood.inventory.graph</field>
+        <field name="model">pathology.blood.inventory</field>
+        <field name="arch" type="xml">
+            <graph string="Blood Inventory Statistics" type="bar">
+                <field name="blood_type" type="row"/>
+                <field name="quantity" type="measure"/>
+                <field name="expiration_date" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Blood Inventory Action -->
     <record id="action_blood_inventory" model="ir.actions.act_window">
         <field name="name">Blood Inventory</field>
         <field name="res_model">pathology.blood.inventory</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,calendar,graph</field>
+        <field name="view_id" ref="view_blood_inventory_tree"/>
     </record>
 
-    
+    <!-- Uncomment the menu item to display in the UI -->
+    <!-- <menuitem id="menu_blood_inventory" name="Blood Inventory" action="action_blood_inventory"/> -->
+
 </odoo>

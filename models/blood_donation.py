@@ -10,4 +10,18 @@ class BloodDonation(models.Model):
     blood_type = fields.Selection(related='donor_id.blood_type', string='Blood Type', store=True)
     quantity = fields.Float(string='Quantity (Liters)', required=True)
     status = fields.Selection([('completed', 'Completed'), ('pending', 'Pending')], string='Status', default='pending')
-    location = fields.Char(string='Location')
+    
+    location = fields.Selection([
+        ('los_angeles_ca', 'Los Angeles, California'),
+        ('san_francisco_ca', 'San Francisco, California'),
+        ('san_diego_ca', 'San Diego, California'),
+        ('houston_tx', 'Houston, Texas'),
+        ('dallas_tx', 'Dallas, Texas'),
+        ('austin_tx', 'Austin, Texas'),
+        ('miami_fl', 'Miami, Florida'),
+        ('orlando_fl', 'Orlando, Florida'),
+        ('tampa_fl', 'Tampa, Florida'),
+        ('new_york_ny', 'New York, New York'),
+        ('buffalo_ny', 'Buffalo, New York'),
+        ('rochester_ny', 'Rochester, New York'),
+    ], string='Location')

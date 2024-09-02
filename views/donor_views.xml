@@ -35,6 +35,18 @@
                         <field name="total_donations" readonly="1" />
                     </group>
                 </sheet>
+                
+                <!-- Success message section -->
+                <div class="s_website_form_end_message d-none">
+                    <div class="oe_structure">
+                        <section class="s_text_block pt64 pb64" data-snippet="s_text_block">
+                            <div class="container">
+                                <h2 class="text-center">This is a success!</h2>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
                 <div class="oe_chatter">
                     <field name="message_follower_ids" groups="base.group_user"/>
                     <field name="message_ids"/>
@@ -48,7 +60,7 @@
         <field name="name">donor.kanban</field>
         <field name="model">pathology.donor</field>
         <field name="arch" type="xml">
-            <kanban class="Donor">
+            <kanban class="o_kanban_custom">
                 <field name="name"/>
                 <field name="age" />
                 <field name="gender" />
@@ -61,13 +73,43 @@
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="o_kanban_details">
-                            <strong><field name="name"/></strong><br/> |      
-                            <field name="last_donation_date"/> | 
-                            <field name="blood_type"/> | 
-                            <field name="age"/> Units | 
-                            <field name="address"/> |    
-                            <field name="donor_image" widget="image"/>  
+                        <div class="o_kanban_details" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center" style="border-bottom: 1px solid #ddd;">
+                                <strong><field name="name"/></strong>
+                                <t t-if="record.gender.raw_value == 'male'">
+                                    <span class="badge badge-primary">Male</span>
+                                </t>
+                                <t t-else="">
+                                    <span class="badge badge-secondary">Female</span>
+                                </t>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="card-text"><strong>Blood Type:</strong> <field name="blood_type"/></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="card-text"><strong>Age:</strong> <field name="age"/> years</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="card-text"><strong>Contact:</strong> <field name="contact_number"/></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="card-text"><strong>Location:</strong> <field name="address"/></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="card-text"><strong>Last Donation:</strong> <field name="last_donation_date"/></p>
+                                        <p class="card-text"><strong>Total Donations:</strong> <field name="total_donations"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted text-center" style="border-top: 1px solid #ddd;">
+                                <field name="donor_image" widget="image" class="img-fluid rounded-circle"/>
+                            </div>
                         </div>
                     </t>
                 </templates>

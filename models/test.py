@@ -4,6 +4,7 @@ from datetime import date
 class PathologyTest(models.Model):
     _name = 'pathology.test'
     _description = 'Pathology Test'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Patient Name', required=True)
     dob = fields.Date(string='Date of Birth', required=True)
@@ -39,5 +40,4 @@ class PathologyTest(models.Model):
     @api.depends('is_minor')
     def _compute_eligible_for_discount(self):
         for record in self:
-            # Assuming that eligible for discount if the patient is a minor
             record.eligible_for_discount = record.is_minor
