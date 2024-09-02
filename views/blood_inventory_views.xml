@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Blood Inventory Tree View -->
+    <record id="view_blood_inventory_tree" model="ir.ui.view">
+        <field name="name">blood.inventory.tree</field>
+        <field name="model">pathology.blood.inventory</field>
+        <field name="arch" type="xml">
+            <tree string="Blood Inventory">
+                <field name="blood_type"/>
+                <field name="quantity" />
+                <field name="expiration_date"/>
+                <field name="location" />
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+
+  
+    <!-- Blood Inventory Form View -->
+    <record id="view_blood_inventory_form" model="ir.ui.view">
+        <field name="name">blood.inventory.form</field>
+        <field name="model">pathology.blood.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Blood Inventory">
+                <sheet>
+                    <group>
+                        <field name="blood_type"/>
+                        <field name="quantity" />
+                        <field name="expiration_date"/>
+                        <field name="location" />
+                        <field name="status" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <!-- Blood Inventory Kanban View -->
+    <record id="view_blood_inventory_kanban" model="ir.ui.view">
+        <field name="name">blood.inventory.kanban</field>
+        <field name="model">pathology.blood.inventory</field>
+        <field name="arch" type="xml">
+            <kanban class="Donor">
+                <field name="blood_type"/>
+                <field name="quantity" />
+                <field name="expiration_date"/>
+                <field name="location" />
+                <field name="status" readonly="1"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_details">
+                            <strong><field name="blood_type"/></strong><br/>      |      
+                            <field name="quantity" />    |     
+                            <field name="location" />    |    <field name="status"/>     |    
+                            <field name="expiration_date"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_blood_inventory" model="ir.actions.act_window">
+        <field name="name">Blood Inventory</field>
+        <field name="res_model">pathology.blood.inventory</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Menu for Blood Inventory -->
+    <menuitem id="menu_blood_inventory_root" name="Blood Management"/>
+    <menuitem id="menu_blood_inventory" name="Blood Inventory" parent="menu_blood_inventory_root" action="action_blood_inventory"/>
+
+    <!-- Menu for Donors -->
+    <menuitem id="menu_donors_root" name="Donor Management" parent="menu_blood_inventory_root"/>
+    <menuitem id="menu_donors" name="Donors" parent="menu_donors_root" action="action_donors"/>
+
+    <!-- Menu for Test Inventory -->
+    <menuitem id="menu_pathology_tests_root" name="Pathology Tests" parent="menu_blood_inventory_root"/>
+    <menuitem id="menu_pathology_tests" name="Tests" parent="menu_pathology_tests_root" action="action_pathology_tests"/>
+</odoo>

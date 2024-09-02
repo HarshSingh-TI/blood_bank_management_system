@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_blood_donation_admin,pathology.blood.donation,model_pathology_blood_donation,group_blood_inventory_admin,1,1,1,1
+access_blood_donation_user,pathology.blood.donation,model_pathology_blood_donation,group_blood_inventory_user,1,0,0,0
+access_donor_admin,pathology.donor,model_pathology_donor,group_blood_inventory_admin,1,1,1,1
+access_donor_user,pathology.donor,model_pathology_donor,group_blood_inventory_user,1,0,0,0
+access_blood_inventory_admin,pathology.blood.inventory,model_pathology_blood_inventory,group_blood_inventory_admin,1,1,1,1
+access_blood_inventory_user,pathology.blood.inventory,model_pathology_blood_inventory,group_blood_inventory_user,1,0,0,0
+access_test_admin,pathology.test,model_pathology_test,group_blood_inventory_admin,1,1,1,1
+access_test_user,pathology.test,model_pathology_test,group_blood_inventory_user,1,0,0,0

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Admin Group -->
+    <record id="group_blood_inventory_admin" model="res.groups">
+        <field name="name">Blood Inventory Admin</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <!-- User Group -->
+    <record id="group_blood_inventory_user" model="res.groups">
+        <field name="name">Blood Inventory User</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

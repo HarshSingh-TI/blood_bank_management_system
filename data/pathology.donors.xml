@@ -1,0 +1,13 @@
+<odoo>
+    <record id="01" model="pathology.donor">
+        <field name="name">Abhishek</field>
+        <field name="age">35</field>
+        <field name="gender">male</field>
+        <field name="donor_image">static/description/blood1.jpeg</field>
+        <field name="blood_type">O+</field>
+        <field name="contact_number">9916245543</field>
+        <field name="address">Dwarka Sec-14</field>
+        <field name="last_donation_date">2024-06-06</field>
+        <field name="total_donations">0</field>
+    </record>
+</odoo>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Donor Tree View -->
+    <record id="view_donor_tree" model="ir.ui.view">
+        <field name="name">donor.tree</field>
+        <field name="model">pathology.donor</field>
+        <field name="arch" type="xml">
+            <tree string="Donors">
+                <field name="name"/>
+                <field name="blood_type"/>
+                <field name="age" />
+                <field name="gender" />
+                <field name="last_donation_date" />
+                <field name="total_donations" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Donor Form View -->
+    <record id="view_donor_form" model="ir.ui.view">
+        <field name="name">donor.form</field>
+        <field name="model">pathology.donor</field>
+        <field name="arch" type="xml">
+            <form string="Donor">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="age" />
+                        <field name="gender" />
+                        <field name="donor_image" widget="image" />
+                        <field name="blood_type"/>
+                        <field name="contact_number" />
+                        <field name="address" />
+                        <field name="last_donation_date" />
+                        <field name="total_donations" readonly="1" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Donor Kanban View -->
+    <record id="view_donor_kanban" model="ir.ui.view">
+        <field name="name">donor.kanban</field>
+        <field name="model">pathology.donor</field>
+        <field name="arch" type="xml">
+            <kanban class="Donor">
+                <field name="name"/>
+                <field name="age" />
+                <field name="gender" />
+                <field name="donor_image" widget="image" />
+                <field name="blood_type"/>
+                <field name="contact_number" />
+                <field name="address" />
+                <field name="last_donation_date" />
+                <field name="total_donations" readonly="1" />
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_details">
+                            <strong><field name="name"/></strong><br/> |      
+                            <field name="last_donation_date"/> | 
+                            <field name="blood_type"/> | 
+                            <field name="age"/> Units | 
+                            <field name="address"/> |    
+                            <field name="donor_image" widget="image"/>  
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Donor Search View -->
+    <record id="view_donor_search" model="ir.ui.view">
+        <field name="name">donor.search</field>
+        <field name="model">pathology.donor</field>
+        <field name="arch" type="xml">
+            <search string="Search Donors">
+                <field name="name"/>
+                <field name="blood_type"/>
+                <field name="gender"/>
+                <field name="age" />
+                <field name="last_donation_date"/>
+                <filter string="Male Donors" name="male_filter" domain="[('gender','=','male')]"/>
+                <filter string="Female Donors" name="female_filter" domain="[('gender','=','female')]"/>
+                <filter string="Recent Donations" name="recent_donations" domain="[('last_donation_date', '>=', context_today())]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Donor Calendar View -->
+    <record id="view_donor_calendar" model="ir.ui.view">
+        <field name="name">donor.calendar</field>
+        <field name="model">pathology.donor</field>
+        <field name="arch" type="xml">
+            <calendar string="Donor Calendar" date_start="last_donation_date" color="blood_type">
+                <field name="name"/>
+                <field name="blood_type"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="last_donation_date"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Donor Graph View -->
+    <!-- <record id="view_donor_graph" model="ir.ui.view">
+        <field name="name">donor.graph</field>
+        <field name="model">pathology.donor</field>
+        <field name="arch" type="xml">
+            <graph string="Donor Statistics" type="bar">
+                <field name="blood_type" type="row"/>
+                <field name="total_donations" type="measure"/>
+                <field name="age" type="col"/>
+            </graph>
+        </field>
+    </record> -->
+
+    <!-- Donor Action -->
+    <record id="action_donors" model="ir.actions.act_window">
+        <field name="name">Donors</field>
+        <field name="res_model">pathology.donor</field>
+        <field name="view_mode">tree,form,kanban,calendar</field>
+        <field name="view_id" ref="view_donor_tree"/>
+        <field name="search_view_id" ref="view_donor_search"/>
+    </record>
+
+    <!-- Uncomment the menu item to display in the UI -->
+    <!-- <menuitem id="menu_donors" name="Donors" action="action_donors"/> -->
+</odoo>

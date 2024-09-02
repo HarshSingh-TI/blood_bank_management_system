@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View for Pathology Test -->
+    <record id="view_pathology_test_form" model="ir.ui.view">
+        <field name="name">pathology.test.form</field>
+        <field name="model">pathology.test</field>
+        <field name="arch" type="xml">
+            <form string="Pathology Test">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="dob"/>
+                        <field name="age" readonly="1"/>
+                        <field name="location"/>
+                        <field name="phone_number"/>
+                        <field name="gender"/>
+                        <field name="eligible_for_discount" readonly="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Pathology Test -->
+    <record id="view_pathology_test_tree" model="ir.ui.view">
+        <field name="name">pathology.test.tree</field>
+        <field name="model">pathology.test</field>
+        <field name="arch" type="xml">
+            <tree string="Pathology Tests">
+                <field name="name"/>
+                <field name="dob"/>
+                <field name="age" readonly="1"/>
+                <field name="location"/>
+                <field name="phone_number"/>
+                <field name="gender"/>
+                <field name="eligible_for_discount" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View for Pathology Test -->
+    <record id="view_pathology_test_kanban" model="ir.ui.view">
+        <field name="name">pathology.test.kanban</field>
+        <field name="model">pathology.test</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_example">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="eligible_for_discount"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong> 
+                                <div>
+                                    <span t-if="record.gender.raw_value == 'male'" class="badge badge-primary">Male</span>
+                                    <span t-if="record.gender.raw_value == 'female'" class="badge badge-success">Female</span>
+                                    <span t-if="record.gender.raw_value == 'other'" class="badge badge-secondary">Other</span>
+                                </div>
+                                <div>
+                                    Age: <field name="age"/> | | 
+                                    Discount: <field name="eligible_for_discount"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Calendar View for Pathology Test -->
+    <record id="view_pathology_test_calendar" model="ir.ui.view">
+        <field name="name">pathology.test.calendar</field>
+        <field name="model">pathology.test</field>
+        <field name="arch" type="xml">
+            <calendar string="Pathology Test Calendar" date_start="dob" color="gender">
+                <field name="name"/>
+                <field name="dob"/>
+                <field name="gender"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Graph View for Pathology Test -->
+    <record id="view_pathology_test_graph" model="ir.ui.view">
+        <field name="name">pathology.test.graph</field>
+        <field name="model">pathology.test</field>
+        <field name="arch" type="xml">
+            <graph string="Pathology Test Analysis" type="bar">
+                <field name="gender" type="row"/>
+                <field name="age" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+  
+
+    <!-- Search View for Pathology Test -->
+    <record id="view_pathology_test_search" model="ir.ui.view">
+        <field name="name">pathology.test.search</field>
+        <field name="model">pathology.test</field>
+        <field name="arch" type="xml">
+            <search string="Search Pathology Tests">
+                <field name="name"/>
+                <field name="location"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <filter string="Eligible for Discount" name="discount_filter" domain="[('eligible_for_discount', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+
+      <!-- Action to Open Pathology Tests -->
+      <record id="action_pathology_tests" model="ir.actions.act_window">
+        <field name="name">Pathology Tests</field>
+        <field name="res_model">pathology.test</field>
+        <field name="view_mode">tree,form,kanban,calendar,graph</field>
+        <field name="view_id" ref="view_pathology_test_tree"/>
+        <field name="search_view_id" ref="view_pathology_test_search"/>
+    </record>
+
+    
+</odoo>

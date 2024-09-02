@@ -1,0 +1,3 @@
+id,name,age,gender,donor_image,blood_type,contact_number,address,last_donation_date,total_donations
+01,Harsh,21,Male,static/description/blood1.jpeg,A+,9876543210,Delhi,2024-02-02,0
+02,Puneet,20,Male,static/description/icon.png,A-,9874563210,Delhi,2024-03-02,0
