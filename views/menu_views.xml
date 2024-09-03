@@ -12,4 +12,11 @@
     <!-- Menu for Test Inventory -->
     <menuitem id="menu_pathology_tests_root" name="Pathology Tests" parent="menu_blood_inventory_root"/>
     <menuitem id="menu_pathology_tests" name="Tests" parent="menu_pathology_tests_root" action="action_pathology_tests"/>
+
+    <!-- Menu Item for Blood Sale -->
+    <menuitem id="menu_blood_sale_root" name="Blood Sale" parent="menu_blood_inventory_root" action="action_blood_sale"/>
+    <menuitem id="menu_blood_sale" name="Blood Sale" parent="menu_blood_sale_root" action="action_blood_sale"/>
+
+    <!-- <menuitem id="menu_blood_invoice_root" name="Blood Sale Invoice" parent="menu_blood_sale_root" action="action_blood_sale"/> -->
+    <menuitem id="menu_blood_invoice" name="Blood Sale Invoice" parent="menu_blood_sale_root" action="action_blood_sale_invoice"/>
 </odoo>

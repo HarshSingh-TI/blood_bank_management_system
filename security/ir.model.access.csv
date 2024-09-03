@@ -7,3 +7,5 @@ access_blood_inventory_admin,pathology.blood.inventory,model_pathology_blood_inv
 access_blood_inventory_user,pathology.blood.inventory,model_pathology_blood_inventory,group_blood_inventory_user,1,0,0,0
 access_test_admin,pathology.test,model_pathology_test,group_blood_inventory_admin,1,1,1,1
 access_test_user,pathology.test,model_pathology_test,group_blood_inventory_user,1,0,0,0
+access_seller_admin,pathology.blood.sale,model_pathology_blood_sale,group_blood_inventory_admin,1,1,1,1
+access_seller_user,pathology.blood.sale,model_pathology_blood_sale,group_blood_inventory_user,1,0,0,0

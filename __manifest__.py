@@ -14,6 +14,8 @@
         'views/donor_views.xml',
         'views/blood_inventory_views.xml',
         'views/test_views.xml',
+        'views/seller_views.xml',
+        'views/invoice_views.xml',
         'views/menu_views.xml'
         # 'data/pathology.donor.csv',
         # 'data/pathology.donors.xml'

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Blood Sale Tree View -->
+    <record id="view_blood_sale_tree" model="ir.ui.view">
+        <field name="name">blood.sale.tree</field>
+        <field name="model">pathology.blood.sale</field>
+        <field name="arch" type="xml">
+            <tree string="Blood Sales">
+                <field name="blood_type"/>
+                <field name="quantity"/>
+                <field name="sale_date"/>
+                <field name="sale_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Blood Sale Form View -->
+    <record id="view_blood_sale_form" model="ir.ui.view">
+        <field name="name">blood.sale.form</field>
+        <field name="model">pathology.blood.sale</field>
+        <field name="arch" type="xml">
+            <form string="Blood Sale">
+                
+                <sheet>
+                    <group>
+                        <field name="blood_type"/>
+                        <field name="quantity"/>
+                        <field name="sale_date"/>
+                        <field name="sale_price"/>
+                        <field name="tax_amount" readonly="1"/>
+                        <field name="service_charge"/>
+                        <field name="grand_total" readonly="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    
+                    <button name="action_generate_invoice" type="object" string="Generate Invoice" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Blood Sale Calendar View -->
+    <record id="view_blood_sale_calendar" model="ir.ui.view">
+        <field name="name">blood.sale.calendar</field>
+        <field name="model">pathology.blood.sale</field>
+        <field name="arch" type="xml">
+            <calendar string="Blood Sale Calendar" date_start="sale_date" color="blood_type">
+                <field name="blood_type"/>
+                <field name="quantity"/>
+                <field name="sale_date"/>
+                <field name="sale_price"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Blood Sale Graph View -->
+    <record id="view_blood_sale_graph" model="ir.ui.view">
+        <field name="name">blood.sale.graph</field>
+        <field name="model">pathology.blood.sale</field>
+        <field name="arch" type="xml">
+            <graph string="Blood Sale Statistics" type="bar">
+                <field name="sale_date" type="row"/>
+                <field name="quantity" type="measure"/>
+                <field name="sale_price" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Blood Sale Kanban View with Bootstrap -->
+    <record id="view_blood_sale_kanban" model="ir.ui.view">
+        <field name="name">blood.sale.kanban</field>
+        <field name="model">pathology.blood.sale</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_example">
+                <field name="blood_type"/>
+                <field name="quantity"/>
+                <field name="sale_price"/>
+                <field name="sale_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record card shadow-sm mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">
+                                    <strong><field name="blood_type"/></strong>
+                                </h5>
+                                <p class="card-text mb-1"><strong>Quantity:</strong> <field name="quantity"/> Pounds</p>
+                                <p class="card-text mb-1"><strong>Price:</strong> <field name="sale_price"/> USD</p>
+                                <p class="card-text mb-0"><strong>Sale Date:</strong> <field name="sale_date"/></p>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Blood Sale Action -->
+    <record id="action_blood_sale" model="ir.actions.act_window">
+        <field name="name">Blood Sale</field>
+        <field name="res_model">pathology.blood.sale</field>
+        <field name="view_mode">tree,form,calendar,graph,kanban</field>
+        <field name="view_id" ref="view_blood_sale_tree"/>
+    </record>
+
+    <!-- Blood Sale Invoice Action -->
+    <record id="action_blood_sale_invoice" model="ir.actions.act_window">
+        <field name="name">Blood Sale Invoice</field>
+        <field name="res_model">pathology.blood.sale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[Command.clear(),
+    (0,0,{'view_mode':'tree','view_id':ref('view_blood_sale_invoice_tree')}),
+    (0,0,{'view_mode':'form','view_id':ref('view_blood_sale_invoice_form')})]"/>
+        <field name="view_id" ref="view_blood_sale_invoice_tree"/>
+    </record>
+</odoo>
