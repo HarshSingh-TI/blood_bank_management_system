@@ -11,25 +11,43 @@
                 <field name="expiration_date"/>
                 <field name="location"/>
                 <field name="status"/>
+                <field name="donor_name" string="Donor Name"/> <!-- Added -->
             </tree>
         </field>
     </record>
 
-    <!-- Blood Inventory Form View -->
-    <record id="view_blood_inventory_form" model="ir.ui.view">
+     <!-- Blood Inventory Form View -->
+     <record id="view_blood_inventory_form" model="ir.ui.view">
         <field name="name">blood.inventory.form</field>
         <field name="model">pathology.blood.inventory</field>
         <field name="arch" type="xml">
             <form string="Blood Inventory">
                 <sheet>
-                    <group>
-                        <field name="donor_id"></field>
-                        <field name="blood_type"/>
-                        <field name="quantity"/>
-                        <field name="expiration_date"/>
-                        <field name="location"/>
-                        <field name="status" readonly="1"/>
-                    </group>
+                    <div class="d-flex justify-content-center align-items-center vh-100">
+                        <div class="card p-4 w-50 shadow-sm">
+                            <group class="mb-3">
+                                <field name="donor_id"/>
+                            </group>
+                            <group class="mb-3">
+                                <field name="donor_name" readonly="1"/> <!-- Added -->
+                            </group>
+                            <group class="mb-3">
+                                <field name="blood_type"/>
+                            </group>
+                            <group class="mb-3">
+                                <field name="quantity"/>
+                            </group>
+                            <group class="mb-3">
+                                <field name="expiration_date"/>
+                            </group>
+                            <group class="mb-3">
+                                <field name="location"/>
+                            </group>
+                            <group class="mb-3">
+                                <field name="status" readonly="1"/>
+                            </group>
+                        </div>
+                    </div>
                 </sheet>
             </form>
         </field>
@@ -40,21 +58,25 @@
         <field name="name">blood.inventory.kanban</field>
         <field name="model">pathology.blood.inventory</field>
         <field name="arch" type="xml">
-            <kanban class="BloodInventory">
+            <kanban class="BloodInventory p-3 bg-light rounded shadow-sm">
                 <field name="blood_type"/>
                 <field name="quantity"/>
                 <field name="expiration_date"/>
                 <field name="location"/>
                 <field name="status" readonly="1"/>
+                <field name="donor_name"/> <!-- Added -->
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="o_kanban_details">
-                            <strong><field name="blood_type"/></strong><br/>
-                            <field name="quantity"/> Liters | 
-                            <field name="location"/> | 
-                            <field name="status"/> | 
-                            <field name="expiration_date"/>
+                        <div class="o_kanban_details card shadow-sm mb-3" style="border-radius: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong><field name="blood_type"/></strong></h5>
+                                <p class="card-text"><strong>Quantity:</strong> <field name="quantity"/> Liters</p>
+                                <p class="card-text"><strong>Location:</strong> <field name="location"/></p>
+                                <p class="card-text"><strong>Status:</strong> <field name="status"/></p>
+                                <p class="card-text"><strong>Expires:</strong> <field name="expiration_date"/></p>
+                                <p class="card-text"><strong>Donor:</strong> <field name="donor_name"/> <!-- Added --></p>
+                            </div>
                         </div>
                     </t>
                 </templates>

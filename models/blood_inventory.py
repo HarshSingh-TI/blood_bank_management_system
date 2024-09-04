@@ -6,6 +6,7 @@ class BloodInventory(models.Model):
     _inherit = ['mail.thread']
     _description = 'Blood Inventory'
 
+    # Existing fields
     blood_type = fields.Selection(
         [('A+', 'A+'), ('A-', 'A-'), ('B+', 'B+'), ('B-', 'B-'),
          ('AB+', 'AB+'), ('AB-', 'AB-'), ('O+', 'O+'), ('O-', 'O-')],
@@ -32,7 +33,10 @@ class BloodInventory(models.Model):
     
     donor_id = fields.Many2one('pathology.donor', string='Donor', ondelete='set null')
     blood_bank_id = fields.Many2one('pathology.blood.bank', string='Blood Bank', ondelete='set null')
-    
+
+    # Related field
+    donor_name = fields.Char(related='donor_id.name', string='Donor Name', readonly=True)
+
     @api.depends('expiration_date')
     def _compute_status(self):
         for record in self:

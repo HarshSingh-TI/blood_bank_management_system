@@ -16,6 +16,11 @@ class BloodSale(models.Model):
     tax_amount = fields.Float(string='Tax Amount', compute='_compute_total', store=True)
     service_charge = fields.Float(string='Service Charge', default=200, required=True)
     grand_total = fields.Float(string='Grand Total', compute='_compute_total', store=True)
+    media_image = fields.Binary(string="Media Image")  
+    donor_name = fields.Char(string="Donor Name")  
+
+    # Many2many field
+    attachment_ids = fields.Many2many('ir.attachment', string='Attachments')
 
     @api.constrains('quantity')
     def _check_quantity(self):
@@ -56,6 +61,6 @@ class BloodSale(models.Model):
             'res_model': 'pathology.blood.sale',
             'view_mode': 'form',  # Changed to 'form' to test visibility
             'view_id': self.env.ref('pathology_blood_bank_management.view_blood_sale_invoice_form').id,
-            'target': 'current',  # Changed to 'current' to open in the same window
+            'target': 'new',  # Changed to 'current' to open in the same window
             'res_id': self.id,
         }

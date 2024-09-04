@@ -16,26 +16,44 @@
         </field>
     </record>
 
-    <!-- Donor Form View -->
+    <!-- Donor Form View with Notebook -->
     <record id="view_donor_form" model="ir.ui.view">
         <field name="name">donor.form</field>
         <field name="model">pathology.donor</field>
         <field name="arch" type="xml">
             <form string="Donor">
                 <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="age" />
-                        <field name="gender" />
-                        <field name="donor_image" widget="image" />
-                        <field name="blood_type"/>
-                        <field name="contact_number" />
-                        <field name="address" />
-                        <field name="last_donation_date" />
-                        <field name="total_donations" readonly="1" />
-                    </group>
+                    <notebook>
+                        <!-- General & Contact Information Page -->
+                        <page string="General Contact Information">
+                            <group>
+                                <field name="name"/>
+                                <field name="age" />
+                                <field name="gender" />
+                                <field name="donor_image" widget="image" />
+                                <field name="blood_type"/>
+                                <field name="contact_number" />
+                                <field name="address" />
+                            </group>
+                        </page>
+
+                        <!-- Donation Information Page -->
+                        <page string="Donation Information">
+                            <group>
+                                <field name="last_donation_date" />
+                                <field name="total_donations" readonly="1" />
+                            </group>
+                        </page>
+
+                        <!-- Media Selection Page -->
+                        <page string="Select Media Image">
+                            <group>
+                                <field name="donor_media" widget="many2many_binary" options="{'preview_image': 'donor_image'}"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
-                
+
                 <!-- Success message section -->
                 <div class="s_website_form_end_message d-none">
                     <div class="oe_structure">
@@ -149,19 +167,6 @@
             </calendar>
         </field>
     </record>
-
-    <!-- Donor Graph View -->
-    <!-- <record id="view_donor_graph" model="ir.ui.view">
-        <field name="name">donor.graph</field>
-        <field name="model">pathology.donor</field>
-        <field name="arch" type="xml">
-            <graph string="Donor Statistics" type="bar">
-                <field name="blood_type" type="row"/>
-                <field name="total_donations" type="measure"/>
-                <field name="age" type="col"/>
-            </graph>
-        </field>
-    </record> -->
 
     <!-- Donor Action -->
     <record id="action_donors" model="ir.actions.act_window">

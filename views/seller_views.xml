@@ -10,6 +10,7 @@
                 <field name="quantity"/>
                 <field name="sale_date"/>
                 <field name="sale_price"/>
+                <field name="donor_name" string="Donor Name"/> <!-- Added -->
             </tree>
         </field>
     </record>
@@ -20,26 +21,36 @@
         <field name="model">pathology.blood.sale</field>
         <field name="arch" type="xml">
             <form string="Blood Sale">
-                
                 <sheet>
-                    <group>
-                        <field name="blood_type"/>
-                        <field name="quantity"/>
-                        <field name="sale_date"/>
-                        <field name="sale_price"/>
-                        <field name="tax_amount" readonly="1"/>
-                        <field name="service_charge"/>
-                        <field name="grand_total" readonly="1"/>
-                    </group>
+                    <notebook>
+                        <!-- General Information and Additional Information Merged -->
+                        <page string="General Information">
+                            <group>
+                                <field name="blood_type"/>
+                                <field name="quantity"/>
+                                <field name="sale_date"/>
+                                <field name="sale_price"/>
+                                <field name="tax_amount" readonly="1"/>
+                                <field name="service_charge"/>
+                                <field name="grand_total" readonly="1"/>
+                                <field name="donor_name" readonly="1"/> <!-- Added -->
+                            </group>
+                        </page>
+
+                        <!-- Media Image Selection Page -->
+                        <page string="Media Image">
+                            <group>
+                                <field name="media_image" widget="image"/> <!-- Assuming the field exists -->
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <footer>
-                    
                     <button name="action_generate_invoice" type="object" string="Generate Invoice" class="btn-primary"/>
                 </footer>
             </form>
         </field>
     </record>
-
 
     <!-- Blood Sale Calendar View -->
     <record id="view_blood_sale_calendar" model="ir.ui.view">
@@ -68,7 +79,7 @@
         </field>
     </record>
 
-    <!-- Blood Sale Kanban View with Bootstrap -->
+    <!-- Blood Sale Kanban View -->
     <record id="view_blood_sale_kanban" model="ir.ui.view">
         <field name="name">blood.sale.kanban</field>
         <field name="model">pathology.blood.sale</field>
@@ -78,6 +89,8 @@
                 <field name="quantity"/>
                 <field name="sale_price"/>
                 <field name="sale_date"/>
+                <field name="donor_name"/> <!-- Added -->
+
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click o_kanban_record card shadow-sm mb-3">
@@ -88,6 +101,7 @@
                                 <p class="card-text mb-1"><strong>Quantity:</strong> <field name="quantity"/> Pounds</p>
                                 <p class="card-text mb-1"><strong>Price:</strong> <field name="sale_price"/> USD</p>
                                 <p class="card-text mb-0"><strong>Sale Date:</strong> <field name="sale_date"/></p>
+                                <p class="card-text mb-0"><strong>Donor:</strong> <field name="donor_name"/> <!-- Added --></p>
                             </div>
                         </div>
                     </t>
@@ -104,14 +118,4 @@
         <field name="view_id" ref="view_blood_sale_tree"/>
     </record>
 
-    <!-- Blood Sale Invoice Action -->
-    <record id="action_blood_sale_invoice" model="ir.actions.act_window">
-        <field name="name">Blood Sale Invoice</field>
-        <field name="res_model">pathology.blood.sale</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_ids" eval="[Command.clear(),
-    (0,0,{'view_mode':'tree','view_id':ref('view_blood_sale_invoice_tree')}),
-    (0,0,{'view_mode':'form','view_id':ref('view_blood_sale_invoice_form')})]"/>
-        <field name="view_id" ref="view_blood_sale_invoice_tree"/>
-    </record>
 </odoo>
