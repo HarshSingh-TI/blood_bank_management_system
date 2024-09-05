@@ -11,7 +11,6 @@
                 <field name="age" />
                 <field name="gender" />
                 <field name="last_donation_date" />
-                <field name="total_donations" />
             </tree>
         </field>
     </record>
@@ -41,7 +40,6 @@
                         <page string="Donation Information">
                             <group>
                                 <field name="last_donation_date" />
-                                <field name="total_donations" readonly="1" />
                             </group>
                         </page>
 
@@ -87,7 +85,6 @@
                 <field name="contact_number" />
                 <field name="address" />
                 <field name="last_donation_date" />
-                <field name="total_donations" readonly="1" />
 
                 <templates>
                     <t t-name="kanban-box">
@@ -115,13 +112,12 @@
                                         <p class="card-text"><strong>Contact:</strong> <field name="contact_number"/></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p class="card-text"><strong>Location:</strong> <field name="address"/></p>
+                                        <!-- <p class="card-text"><strong>Location:</strong> <field name="address"/></p> -->
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="card-text"><strong>Last Donation:</strong> <field name="last_donation_date"/></p>
-                                        <p class="card-text"><strong>Total Donations:</strong> <field name="total_donations"/></p>
                                     </div>
                                 </div>
                             </div>

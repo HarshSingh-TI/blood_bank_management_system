@@ -10,7 +10,7 @@
                 <field name="quantity"/>
                 <field name="sale_date"/>
                 <field name="sale_price"/>
-                <field name="donor_name" string="Donor Name"/> <!-- Added -->
+                <field name="donor_name" string="Buyer"/> <!-- Added -->
             </tree>
         </field>
     </record>
@@ -33,7 +33,7 @@
                                 <field name="tax_amount" readonly="1"/>
                                 <field name="service_charge"/>
                                 <field name="grand_total" readonly="1"/>
-                                <field name="donor_name" readonly="1"/> <!-- Added -->
+                                <field name="donor_name" /> <!-- Added -->
                             </group>
                         </page>
 
@@ -41,6 +41,13 @@
                         <page string="Media Image">
                             <group>
                                 <field name="media_image" widget="image"/> <!-- Assuming the field exists -->
+                            </group>
+                        </page>
+
+                        <!-- Description Page -->
+                        <page string="Description">
+                            <group>
+                                <field name="description_html" widget="html"/> <!-- Added HTML field -->
                             </group>
                         </page>
                     </notebook>
@@ -101,7 +108,7 @@
                                 <p class="card-text mb-1"><strong>Quantity:</strong> <field name="quantity"/> Pounds</p>
                                 <p class="card-text mb-1"><strong>Price:</strong> <field name="sale_price"/> USD</p>
                                 <p class="card-text mb-0"><strong>Sale Date:</strong> <field name="sale_date"/></p>
-                                <p class="card-text mb-0"><strong>Donor:</strong> <field name="donor_name"/> <!-- Added --></p>
+                                <p class="card-text mb-0"><strong>Buyer:</strong> <field name="donor_name"/> <!-- Added --></p>
                             </div>
                         </div>
                     </t>

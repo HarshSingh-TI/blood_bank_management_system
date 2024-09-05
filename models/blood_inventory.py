@@ -14,23 +14,11 @@ class BloodInventory(models.Model):
     )
     quantity = fields.Float(string='Quantity (Pounds)', required=True, tracking=True)
     expiration_date = fields.Date(string='Expiration Date', required=True)
-    location = fields.Selection([
-        ('los_angeles_ca', 'Los Angeles, California'),
-        ('san_francisco_ca', 'San Francisco, California'),
-        ('san_diego_ca', 'San Diego, California'),
-        ('houston_tx', 'Houston, Texas'),
-        ('dallas_tx', 'Dallas, Texas'),
-        ('austin_tx', 'Austin, Texas'),
-        ('miami_fl', 'Miami, Florida'),
-        ('orlando_fl', 'Orlando, Florida'),
-        ('tampa_fl', 'Tampa, Florida'),
-        ('new_york_ny', 'New York, New York'),
-        ('buffalo_ny', 'Buffalo, New York'),
-        ('rochester_ny', 'Rochester, New York'),
-    ], string='Location')
+    
 
     status = fields.Selection([('available', 'Available'), ('expired', 'Expired')], string='Status', compute='_compute_status', store=True)
-    
+    location_id = fields.Many2one('pathology.blood.location', string='Location', required=True)
+
     donor_id = fields.Many2one('pathology.donor', string='Donor', ondelete='set null')
     blood_bank_id = fields.Many2one('pathology.blood.bank', string='Blood Bank', ondelete='set null')
 
@@ -82,3 +70,6 @@ class BloodInventory(models.Model):
             inventory_record.quantity += quantity
         else:
             raise ValidationError(_('No inventory record found for the specified blood type to add quantity.'))
+
+
+    

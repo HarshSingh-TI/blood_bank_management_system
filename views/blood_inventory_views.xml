@@ -9,7 +9,7 @@
                 <field name="blood_type"/>
                 <field name="quantity"/>
                 <field name="expiration_date"/>
-                <field name="location"/>
+                <field name="location_id"/>
                 <field name="status"/>
                 <field name="donor_name" string="Donor Name"/> <!-- Added -->
             </tree>
@@ -41,7 +41,7 @@
                                 <field name="expiration_date"/>
                             </group>
                             <group class="mb-3">
-                                <field name="location"/>
+                                <field name="location_id"/>
                             </group>
                             <group class="mb-3">
                                 <field name="status" readonly="1"/>
@@ -62,7 +62,7 @@
                 <field name="blood_type"/>
                 <field name="quantity"/>
                 <field name="expiration_date"/>
-                <field name="location"/>
+                <field name="location_id"/>
                 <field name="status" readonly="1"/>
                 <field name="donor_name"/> <!-- Added -->
 
@@ -72,7 +72,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><strong><field name="blood_type"/></strong></h5>
                                 <p class="card-text"><strong>Quantity:</strong> <field name="quantity"/> Liters</p>
-                                <p class="card-text"><strong>Location:</strong> <field name="location"/></p>
+                                <p class="card-text"><strong>Location:</strong> <field name="location_id"/></p>
                                 <p class="card-text"><strong>Status:</strong> <field name="status"/></p>
                                 <p class="card-text"><strong>Expires:</strong> <field name="expiration_date"/></p>
                                 <p class="card-text"><strong>Donor:</strong> <field name="donor_name"/> <!-- Added --></p>
@@ -93,7 +93,7 @@
                 <field name="blood_type"/>
                 <field name="quantity"/>
                 <field name="expiration_date"/>
-                <field name="location"/>
+                <field name="location_id"/>
                 <field name="status"/>
             </calendar>
         </field>

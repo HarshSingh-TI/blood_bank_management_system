@@ -19,8 +19,8 @@ class Donor(models.Model):
         string='Blood Type', 
         required=True
     )
-    contact_number = fields.Char(string='Contact Number', required=True)
-    address = fields.Text(string='Address', tracking=True)
+    contact_number = fields.Char(string='Contact Number', required=True, size=10)
+    address = fields.Text(string='Address')
     last_donation_date = fields.Date(string='Last Donation Date')
     total_donations = fields.Integer(string='Total Donations', compute='_compute_total_donations', store=True)
     donor_media = fields.Many2many('ir.attachment', string='Donor Media')

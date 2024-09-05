@@ -7,29 +7,62 @@
         <field name="arch" type="xml">
             <form string="Pathology Test">
                 <sheet>
-                    <div class="d-flex justify-content-center align-items-center vh-100">
-                        <div class="card p-4 shadow w-50">
-                            <notebook>
-                                <page string="General Information">
-                                    <group>
-                                        <field name="name" class="form-control"/>
-                                        <field name="dob" class="form-control"/>
-                                        <field name="age" readonly="1" class="form-control"/>
-                                        <field name="location" class="form-control"/>
-                                        <field name="phone_number" class="form-control"/>
-                                        <field name="gender" widget="radio" class="form-check-input"/>
-                                        <field name="eligible_for_discount" readonly="1" class="form-control"/>
-                                    </group>
-                                </page>
-                                <page string="Communication">
-                                    <group>
-                                        <div class="oe_chatter">
-                                            <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                                            <field name="message_ids" widget="mail_thread"/>
-                                        </div>
-                                    </group>
-                                </page>
-                            </notebook>
+                    <div class="container mt-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow-lg">
+                                    <div class="card-header bg-primary text-white">
+                                        <h4 class="mb-0">Pathology Test Details</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <notebook>
+                                            <page string="General Information">
+                                                
+                                                    <div class="row w-50">
+                                                        <div class="col-md-12 mb-4">
+                                                            <label for="name" class="form-label">Name:</label>
+                                                            <field name="name" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-12 mb-4">
+                                                            <label for="dob" class="form-label">Date of Birth:</label>
+                                                            <field name="dob" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-12 mb-4">
+                                                            <label for="age" class="form-label">Age:</label>
+                                                            <field name="age" readonly="1" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-12 mb-4">
+                                                            <label for="location" class="form-label">Location:</label>
+                                                            <field name="location" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-12 mb-4">
+                                                            <label for="phone_number" class="form-label">Phone Number:</label>
+                                                            <field name="phone_number" class="form-control"/>
+                                                        </div>
+                                                        <div class="col-md-12 mb-8 "> <!-- Increased margin for gender -->
+                                                            <label for="gender" class="form-label">Gender:</label>
+                                                            <field name="gender" widget="radio" />
+                                                            
+                                                        </div>
+                                                        <div class="col-md-12 mb-8"> <!-- Increased margin for eligible_for_discount -->
+                                                            <label for="eligible_for_discount" class="form-label">Eligible for Discount:</label>
+                                                            <field name="eligible_for_discount" readonly="1" class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                           
+                                            </page>
+                                            <page string="Test Package">
+                                                <group>
+                                                    <div class="oe_chatter">
+                                                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                                                        <field name="message_ids" widget="mail_thread"/>
+                                                    </div>
+                                                </group>
+                                            </page>
+                                        </notebook>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </sheet>
@@ -50,18 +83,20 @@
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="o_kanban_record o_kanban_card bg-light shadow-sm p-3 mb-3 rounded">
+                        <div class="o_kanban_record o_kanban_card bg-light shadow-sm rounded p-3 mb-3">
                             <div class="o_kanban_details">
-                                <strong><field name="name"/></strong>
-                                <div>
+                                <h5 class="card-title">
+                                    <field name="name"/>
+                                </h5>
+                                <p class="card-text">
                                     <span t-if="record.gender.raw_value == 'male'" class="badge badge-primary">Male</span>
                                     <span t-if="record.gender.raw_value == 'female'" class="badge badge-success">Female</span>
                                     <span t-if="record.gender.raw_value == 'other'" class="badge badge-secondary">Other</span>
-                                </div>
-                                <div>
+                                </p>
+                                <p class="card-text">
                                     Age: <field name="age"/> | 
                                     Discount: <field name="eligible_for_discount"/>
-                                </div>
+                                </p>
                             </div>
                         </div>
                     </t>
