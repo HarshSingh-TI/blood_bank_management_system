@@ -4,4 +4,5 @@ from . import blood_inventory
 from . import donor
 from . import blood_donation
 from . import test
+from . import test_extension
 from . import seller

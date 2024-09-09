@@ -70,6 +70,25 @@
         </field>
     </record>
 
+    <record id="view_inherited_pathology_test_form" model="ir.ui.view">
+        <field name="name">pathology.test.form.inherit</field>
+        <field name="model">pathology.test</field>
+        <field name="inherit_id" ref="view_pathology_test_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='gender']" position="after">
+                <div class="col-md-12 mb-4">
+                    <label for="test_type" class="form-label">Test Type:</label>
+                    <field name="test_type" class="form-control"></field>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <label for="doctor_name" class="form-label">Doctor Name:</label>
+                    <field name="doctor_name" class="form-control"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
     <!-- Kanban View for Pathology Test -->
     <record id="view_pathology_test_kanban" model="ir.ui.view">
         <field name="name">pathology.test.kanban</field>

@@ -6,6 +6,11 @@
         <field name="model">pathology.donor</field>
         <field name="arch" type="xml">
             <tree string="Donors">
+                <header>
+                    <button type='object' name='search_donors_older_than' string='Refine'/>
+
+                    
+                </header>
                 <field name="name"/>
                 <field name="blood_type"/>
                 <field name="age" />
@@ -13,6 +18,8 @@
                 <field name="last_donation_date" />
             </tree>
         </field>
+        <!-- Apply a domain to show only donors who are older than 18 and have donated before -->
+        <!-- <field name="domain">[('age', '>', 18), ('last_donation_date', '!=', False)]</field> -->
     </record>
 
     <!-- Donor Form View with Notebook -->
@@ -142,9 +149,12 @@
                 <field name="gender"/>
                 <field name="age" />
                 <field name="last_donation_date"/>
+                <!-- Filters based on domain operators -->
                 <filter string="Male Donors" name="male_filter" domain="[('gender','=','male')]"/>
                 <filter string="Female Donors" name="female_filter" domain="[('gender','=','female')]"/>
                 <filter string="Recent Donations" name="recent_donations" domain="[('last_donation_date', '>=', context_today())]"/>
+                <filter string="Donors Above 30" name="donors_above_30" domain="[('age', '>', 30)]"/>
+                <filter string="A+ Donors" name="donors_a_plus" domain="[('blood_type', '=', 'A+')]"/>
             </search>
         </field>
     </record>
