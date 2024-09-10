@@ -36,7 +36,7 @@
                                                             <field name="location" class="form-control"/>
                                                         </div>
                                                         <div class="col-md-12 mb-4">
-                                                            <label for="phone_number" class="form-label">Phone Number:</label>
+                                                            <label for="phone_number" widget="phone" class="form-label">Phone Number:</label>
                                                             <field name="phone_number" class="form-control"/>
                                                         </div>
                                                         <div class="col-md-12 mb-8 "> <!-- Increased margin for gender -->
@@ -75,7 +75,7 @@
         <field name="model">pathology.test</field>
         <field name="inherit_id" ref="view_pathology_test_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='gender']" position="after">
+            <xpath expr="//field[@name='gender']" position="before">
                 <div class="col-md-12 mb-4">
                     <label for="test_type" class="form-label">Test Type:</label>
                     <field name="test_type" class="form-control"></field>
@@ -85,6 +85,8 @@
                     <field name="doctor_name" class="form-control"/>
                 </div>
             </xpath>
+
+            <!-- <xpath expr="//field[@name='gender']" position="move" target="//field[@name='dob']" /> -->
         </field>
     </record>
 
@@ -139,6 +141,32 @@
                 <field name="gender"/>
                 <field name="eligible_for_discount" readonly="1"/>
             </tree>
+        </field>
+    </record>
+
+
+     <!-- Inherited Tree View for Pathology Test with different position aspects -->
+     <record id="view_inherited_pathology_test_tree" model="ir.ui.view">
+        <field name="name">pathology.test.tree.inherit</field>
+        <field name="model">pathology.test</field>
+        <field name="inherit_id" ref="view_pathology_test_tree"/> <!-- Referencing original tree view -->
+        <field name="arch" type="xml">
+
+            <!-- 6. Position "before" - Add a field before 'dob' in the tree view -->
+            <xpath expr="//field[@name='dob']" position="before">
+                <field name="test_type"/>
+            </xpath>
+
+            <!-- 7. Position "after" - Add a field after 'location' in the tree view -->
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="doctor_name"/>
+            </xpath>
+
+            <!-- 8. Position "replace" - Replace the 'gender' field with a custom label -->
+            <xpath expr="//field[@name='gender']" position="replace">
+                <field name="gender" string="Patient Gender"/>
+            </xpath>
+
         </field>
     </record>
 

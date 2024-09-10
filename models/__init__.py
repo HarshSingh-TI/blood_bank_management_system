@@ -1,4 +1,5 @@
 # models/__init__.py
+from . import sale_order_inherit
 from . import blood_location
 from . import blood_inventory
 from . import donor

@@ -38,7 +38,7 @@
                                 <field name="gender" />
                                 <field name="donor_image" widget="image" />
                                 <field name="blood_type"/>
-                                <field name="contact_number" />
+                                <field name="contact_number" widget="phone"/>
                                 <field name="address" />
                             </group>
                         </page>

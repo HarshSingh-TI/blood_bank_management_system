@@ -7,7 +7,7 @@
         This module helps manage blood donations, donors, and blood inventory in a pathology lab. It provides functionalities for managing donation records, donor information, blood inventory, and more.
     """,
     'author': 'Harsh Singh',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail','sale'],
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
@@ -16,6 +16,7 @@
         'views/test_views.xml',
         'views/seller_views.xml',
         'views/invoice_views.xml',
+        'views/sale_order_inherit_views.xml',
         'views/menu_views.xml'
         # 'data/pathology.donor.csv',
         # 'data/pathology.donors.xml'
