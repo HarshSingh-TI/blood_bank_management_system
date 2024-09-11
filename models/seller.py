@@ -13,9 +13,9 @@ class BloodSale(models.Model):
     quantity = fields.Float(string='Quantity (Pounds)', required=True)
     sale_date = fields.Date(string='Sale Date', required=True, default=fields.Date.today)
     sale_price = fields.Float(string='Sale Price', required=True)
-    tax_amount = fields.Float(string='Tax Amount', compute='_compute_total', store=True)
+    tax_amount = fields.Float(string='Tax Amount', compute='_compute_total', inverse='_inverse_tax_and_total', store=True)
     service_charge = fields.Float(string='Service Charge', default=200, required=True)
-    grand_total = fields.Float(string='Grand Total', compute='_compute_total', store=True)
+    grand_total = fields.Float(string='Grand Total', compute='_compute_total', inverse='_inverse_tax_and_total', store=True)
     media_image = fields.Binary(string="Media Image")  
     donor_name = fields.Char(string="Buyer Name")  
 
@@ -25,6 +25,7 @@ class BloodSale(models.Model):
     # New fields
     description_html = fields.Html(string='Description')  
     currency_id = fields.Many2one('res.currency', string='Currency')  
+
     @api.constrains('quantity')
     def _check_quantity(self):
         for record in self:
@@ -39,7 +40,18 @@ class BloodSale(models.Model):
         for record in self:
             record.tax_amount = record.sale_price * 0.125  # 12.5% tax
             record.grand_total = (record.sale_price + record.tax_amount + record.service_charge) * record.quantity
-            
+
+    def _inverse_tax_and_total(self):
+        """
+        Inverse method to adjust related fields when grand_total is manually changed.
+        """
+        for record in self:
+            # Adjust sale_price based on the manually updated grand_total
+            if record.grand_total:
+                record.sale_price = (record.grand_total / record.quantity) - record.service_charge - record.tax_amount
+            else:
+                record.sale_price = 0
+
     @api.model
     def create(self, vals):
         blood_type = vals.get('blood_type')
@@ -67,5 +79,3 @@ class BloodSale(models.Model):
             'target': 'new',  # Changed to 'current' to open in the same window
             'res_id': self.id,
         }
-
-    

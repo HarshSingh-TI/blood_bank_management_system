@@ -86,7 +86,9 @@
                 </div>
             </xpath>
 
-            <!-- <xpath expr="//field[@name='gender']" position="move" target="//field[@name='dob']" /> -->
+            <xpath expr="//field[@name='dob']" position="after">
+            <xpath expr="//field[@name='gender']" position="move" /> 
+        </xpath>
         </field>
     </record>
 
@@ -162,10 +164,7 @@
                 <field name="doctor_name"/>
             </xpath>
 
-            <!-- 8. Position "replace" - Replace the 'gender' field with a custom label -->
-            <xpath expr="//field[@name='gender']" position="replace">
-                <field name="gender" string="Patient Gender"/>
-            </xpath>
+          
 
         </field>
     </record>
